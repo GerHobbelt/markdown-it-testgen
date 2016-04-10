@@ -5,7 +5,6 @@ var p       = require('path');
 
 var _       = require('lodash');
 var yaml    = require('js-yaml');
-var merge   = require('merge');
 
 
 function fixLF (str) {
@@ -191,7 +190,7 @@ function generate(path, options, env, md) {
     (data.meta.skip ? describe.skip : describe)(desc, function () {
       data.fixtures.forEach(function (fixture) {
         it(fixture.header && options.header ? fixture.header : 'line ' + (fixture.first.range[0] - 1), function () {
-          options.assert.strictEqual(md.render(fixture.first.text, merge(true, env)), fixture.second.text);
+          options.assert.strictEqual(md.render(fixture.first.text, _.clone(env)), fixture.second.text);
         });
       });
     });
