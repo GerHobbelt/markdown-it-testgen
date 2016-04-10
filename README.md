@@ -51,15 +51,15 @@ If header missed - line number will be used instead.
 
 ## API
 
-### module.exports(path, options, env, md)
+### module.exports(path, options, md, env)
 
 - __path__ - file or directory name
 - __options__ (not mandatory)
   - __header__ - Default `false`. Set `true` to use heaters for test names
   - __sep__ - array of allowed separators for samples, [ '.' ] by default
   - __assert__ - custom assertion package, `require('chai').assert` by default.
-- __env__ (not mandatory) - environment object to be passed through to `markdown-it.render()`
 - __md__ - `markdown-it` instance to parse and compare samples
+- __env__ (not mandatory) - environment object to be passed through to `markdown-it.render()`
 
 ### module.exports.load(path, options, iterator)
 

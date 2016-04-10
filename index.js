@@ -168,16 +168,13 @@ function load(path, options, iterator) {
 }
 
 
-function generate(path, options, env, md) {
+function generate(path, options, md, env) {
   if (!md) {
-    if (!env) {
-      md = options;
-      options = {};
-    } else {
-      md = env;
-    }
-    env = {};
+    md = options;
+    options = {};
   }
+
+  env = env || {};
 
   options = _.assign({}, options);
   options.assert = options.assert || require('chai').assert;
