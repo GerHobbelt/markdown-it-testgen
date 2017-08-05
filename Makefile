@@ -12,15 +12,30 @@ CURR_HEAD   := $(firstword $(shell git show-ref --hash HEAD | cut -b -6) master)
 GITHUB_PROJ := https://github.com//markdown-it/${NPM_PACKAGE}
 
 
+build: lint test coverage todo 
+
 lint:
-	eslint --reset .
+	eslint .
 
 test: lint
-	mocha -R spec
+	mocha
 
 coverage:
-	rm -rf coverage
-	istanbul cover node_modules/.bin/_mocha
+	-rm -rf coverage
+	istanbul cover node_modules/mocha/bin/_mocha
 
-.PHONY: lint test  coverage
-.SILENT: lint test
+report-coverage: coverage
+
+todo:
+	@echo ""
+	@echo "TODO list"
+	@echo "---------"
+	@echo ""
+	grep 'TODO' -n -r ./lib 2>/dev/null || test true
+
+clean:
+	-rm -rf ./coverage/
+	-rm -rf ./dist/
+
+.PHONY: clean lint test todo coverage report-coverage
+.SILENT: help lint test todo

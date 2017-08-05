@@ -7,7 +7,7 @@ var _       = require('lodash');
 var yaml    = require('js-yaml');
 
 
-function fixLF (str) {
+function fixLF(str) {
   return str.length ? str + '\n' : str;
 }
 
