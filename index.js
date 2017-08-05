@@ -168,11 +168,13 @@ function load(path, options, iterator) {
 }
 
 
-function generate(path, options, md) {
+function generate(path, options, md, env) {
   if (!md) {
     md = options;
     options = {};
   }
+
+  env = env || {};
 
   options = _.assign({}, options);
   options.assert = options.assert || require('chai').assert;
@@ -185,7 +187,7 @@ function generate(path, options, md) {
     (data.meta.skip ? describe.skip : describe)(desc, function () {
       data.fixtures.forEach(function (fixture) {
         it(fixture.header && options.header ? fixture.header : 'line ' + (fixture.first.range[0] - 1), function () {
-          options.assert.strictEqual(md.render(fixture.first.text), fixture.second.text);
+          options.assert.strictEqual(md.render(fixture.first.text, _.clone(env)), fixture.second.text);
         });
       });
     });
