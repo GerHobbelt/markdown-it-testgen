@@ -1,5 +1,5 @@
 {
-  "name": "markdown-it-testgen",
+  "name": "@gerhobbelt/markdown-it-testgen",
   "version": "0.1.5-1",
   "description": "Tests generator for markdown-it markdown parser",
   "keywords": [
@@ -8,7 +8,7 @@
   "homepage": "https://github.com/markdown-it/markdown-it-testgen",
   "repository": {
     "type": "git",
-    "url": "git://github.com/markdown-it/markdown-it-testgen.git"
+    "url": "git://github.com/GerHobbelt/markdown-it-testgen.git"
   },
   "bugs": {
     "url": "https://github.com/markdown-it/markdown-it-testgen/issues"
@@ -21,12 +21,12 @@
   },
   "dependencies": {
     "lodash": "4.17.4",
-    "chai": "4.1.1",
-    "js-yaml": "3.9.1"
+    "chai": "4.1.2",
+    "js-yaml": "3.10.0"
   },
   "devDependencies": {
-    "eslint": "4.3.0",
+    "eslint": "4.10.0",
     "istanbul": "0.4.5",
-    "mocha": "3.5.0"
+    "mocha": "4.0.1"
   }
 }
