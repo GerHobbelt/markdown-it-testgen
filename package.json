@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/markdown-it-testgen",
-  "version": "0.1.5-1",
+  "version": "0.1.5-2",
   "description": "Tests generator for markdown-it markdown parser",
   "keywords": [
     "markdown-it"
