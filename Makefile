@@ -37,5 +37,13 @@ clean:
 	-rm -rf ./coverage/
 	-rm -rf ./dist/
 
-.PHONY: clean lint test todo coverage report-coverage
+superclean: clean
+	-rm -rf ./node_modules/
+	-rm -f ./package-lock.json
+
+prep: superclean
+	-ncu -a --packageFile=package.json
+	-npm install
+
+.PHONY: clean lint test todo coverage report-coverage superclean prep
 .SILENT: help lint test todo
