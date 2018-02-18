@@ -18,11 +18,8 @@
   "scripts": {
     "test": "make test"
   },
-  "scripts": {
-    "test": "make test"
-  },
   "dependencies": {
-    "lodash": "~ 2.4.1",
+    "lodash": "~ 4.17.5",
     "chai": "~ 1.10.0",
     "js-yaml": "~ 3.2.4"
   },
