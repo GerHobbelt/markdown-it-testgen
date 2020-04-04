@@ -1,7 +1,6 @@
 /* global it, describe */
 'use strict';
 
-
 var p       = require('path');
 var assert  = require('assert');
 var testgen = require('..');

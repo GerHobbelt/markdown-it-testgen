@@ -103,7 +103,7 @@ rules:
   no-octal-escape:        2
   no-path-concat:         2
   no-proto:               2
-  no-redeclare:           2
+  no-redeclare:           1
   # Postponed
   #no-regex-spaces:        2
   no-return-assign:       2
