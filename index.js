@@ -1,11 +1,9 @@
-/* global it, describe */
-'use strict';
 
-var fs      = require('fs');
-var p       = require('path');
+let fs      = require('fs');
+let p       = require('path');
 
-var assign  = require('object-assign');
-var yaml    = require('js-yaml');
+let assign  = require('object-assign');
+let yaml    = require('js-yaml');
 
 
 function _class(obj) { return Object.prototype.toString.call(obj); }
@@ -20,17 +18,17 @@ function fixLF(str) {
 }
 
 function parse(input, options) {
-  var lines = input.split(/\r?\n/g),
+  let lines = input.split(/\r?\n/g),
       max = lines.length,
       min = 0,
       line = 0,
       fixture, i, l, currentSep, blockStart;
 
-  var result = {
+  let result = {
     fixtures: []
   };
 
-  var sep = options.sep || [ '.' ];
+  let sep = options.sep || [ '.' ];
 
   // Try to parse meta
   if (/^-{3,}$/.test(lines[0] || '')) {
@@ -123,7 +121,7 @@ function parse(input, options) {
 // - fixtures
 //
 function load(path, options, iterator) {
-  var input, parsed,
+  let input, parsed,
       stat = fs.statSync(path);
 
   if (isFunction(options)) {
@@ -155,7 +153,7 @@ function load(path, options, iterator) {
     return parsed;
   }
 
-  var result, res;
+  let result, res;
   if (stat.isDirectory()) {
     result = [];
 
@@ -190,7 +188,7 @@ function generate(path, options, md, env) {
   load(path, options, function (data) {
     data.meta = data.meta || {};
 
-    var desc = data.meta.desc || p.relative(path, data.file);
+    let desc = data.meta.desc || p.relative(path, data.file);
 
     (data.meta.skip ? describe.skip : describe)(desc, function () {
       data.fixtures.forEach(function (fixture) {

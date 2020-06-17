@@ -1,10 +1,8 @@
-/* global it, describe */
-'use strict';
+/* eslint-env mocha, es6 */
 
-var p       = require('path');
-var assert  = require('assert');
-var testgen = require('..');
-
+let p       = require('path');
+let assert  = require('assert');
+let testgen = require('../');
 
 describe('Generator', function () {
 
@@ -64,7 +62,7 @@ describe('Generator', function () {
   });
 
   it('should scan dir', function () {
-    var files = 0;
+    let files = 0;
 
     testgen.load(p.join(__dirname, 'fixtures'), function () {
       files++;

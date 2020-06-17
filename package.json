@@ -7,20 +7,43 @@
   ],
   "repository": "GerHobbelt/markdown-it-testgen",
   "license": "MIT",
-  "main": "index.js",
+  "source": "index.js",
+  "main": "dist/markdownTestGen.js",
+  "module": "dist/markdownItTestGen.mjs",
+  "engines": {
+    "node": ">=10"
+  },
   "scripts": {
-    "test": "make test",
     "build": "make",
+    "test": "make test",
+    "todo": "make todo",
+    "clean": "make clean",
+    "superclean": "make superclean",
+    "doc": "make doc",
+    "lint": "make lint",
+    "lintfix": "make lintfix",
+    "cov": "make report-coverage",
     "pub": "npm publish --access public"
   },
   "dependencies": {
-    "js-yaml": "3.13.1",
+    "js-yaml": "3.14.0",
     "object-assign": "4.1.1"
   },
   "devDependencies": {
+    "@gerhobbelt/markdown-it": "11.0.0-36",
+    "@gerhobbelt/markdown-it-testgen": "0.1.6-7",
+    "@gerhobbelt/prepend-header": "1.0.8-3",
+    "camelcase": "6.0.0",
     "chai": "4.2.0",
-    "eslint": "6.8.0",
-    "istanbul": "0.4.5",
-    "mocha": "7.1.1"
-  }
+    "cross-env": "7.0.2",
+    "eslint": "7.2.0",
+    "microbundle": "0.12.1",
+    "mocha": "8.0.1",
+    "nyc": "15.1.0"
+  },
+  "reporter": [
+    "lcov",
+    "text",
+    "text-summary"
+  ]
 }
