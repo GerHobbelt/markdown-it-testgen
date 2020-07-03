@@ -173,8 +173,7 @@ function load(path, options, iterator) {
   return null;
 }
 
-
-function generate(path, options, md, env) {
+function generate(path, options, md, env, meta_overrides) {
   if (!md) {
     md = options;
     options = {};
@@ -186,9 +185,11 @@ function generate(path, options, md, env) {
   options.assert = options.assert || require('chai').assert;
 
   load(path, options, function (data) {
-    data.meta = data.meta || {};
+    data.meta = Object.assign({}, data.meta, meta_overrides);
 
     let desc = data.meta.desc || p.relative(path, data.file);
+    options.assert.strictEqual(typeof desc, 'string', 'every test series is expected to come with a decent title');
+    options.assert(desc.length > 0, 'every test series is expected to come with a decent *non-empty* title');
 
     (data.meta.skip ? describe.skip : describe)(desc, function () {
       data.fixtures.forEach(function (fixture) {
