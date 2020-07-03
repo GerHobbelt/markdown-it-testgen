@@ -2,7 +2,6 @@
 let fs      = require('fs');
 let p       = require('path');
 
-let assign  = require('object-assign');
 let yaml    = require('js-yaml');
 
 
@@ -181,8 +180,8 @@ function generate(path, options, md, env, meta_overrides) {
 
   env = env || {};
 
-  options = assign({}, options);
-  options.assert = options.assert || require('chai').assert;
+  options = Object.assign({}, options);
+  options.assert = options.assert || require('assert');
 
   load(path, options, function (data) {
     data.meta = Object.assign({}, data.meta, meta_overrides);
@@ -194,7 +193,7 @@ function generate(path, options, md, env, meta_overrides) {
     (data.meta.skip ? describe.skip : describe)(desc, function () {
       data.fixtures.forEach(function (fixture) {
         it(fixture.header && options.header ? fixture.header : 'line ' + (fixture.first.range[0] - 1), function () {
-          options.assert.strictEqual(md.render(fixture.first.text, assign({}, env)), fixture.second.text);
+          options.assert.strictEqual(md.render(fixture.first.text, Object.assign({}, env)), fixture.second.text);
         });
       });
     });

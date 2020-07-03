@@ -1,10 +1,8 @@
-/*! markdown-it-testgen 0.1.6-9 https://github.com//GerHobbelt/markdown-it-testgen @license MIT */
+/*! markdown-it-testgen 0.1.6-10 https://github.com//GerHobbelt/markdown-it-testgen @license MIT */
 
 let fs = require('fs');
 
 let p = require('path');
-
-let assign = require('object-assign');
 
 let yaml = require('js-yaml');
 
@@ -180,6 +178,10 @@ function load(path, options, iterator) {
       parsed.meta = null;
     }
 
+    console.log('parsed.meta = ', {
+      meta: parsed.meta
+    });
+
     if (iterator) {
       iterator(parsed);
     }
@@ -214,17 +216,21 @@ function generate(path, options, md, env, meta_overrides) {
   }
 
   env = env || {};
-  options = assign({}, options);
-  options.assert = options.assert || require('chai').assert;
+  options = Object.assign({}, options);
+  options.assert = options.assert || require('assert');
   load(path, options, function (data) {
     data.meta = Object.assign({}, data.meta, meta_overrides);
+    console.log('data.meta = ', {
+      data: data.meta,
+      meta_overrides
+    });
     let desc = data.meta.desc || p.relative(path, data.file);
     options.assert.strictEqual(typeof desc, 'string', 'every test series is expected to come with a decent title');
     options.assert(desc.length > 0, 'every test series is expected to come with a decent *non-empty* title');
     (data.meta.skip ? describe.skip : describe)(desc, function () {
       data.fixtures.forEach(function (fixture) {
         it(fixture.header && options.header ? fixture.header : 'line ' + (fixture.first.range[0] - 1), function () {
-          options.assert.strictEqual(md.render(fixture.first.text, assign({}, env)), fixture.second.text);
+          options.assert.strictEqual(md.render(fixture.first.text, Object.assign({}, env)), fixture.second.text);
         });
       });
     });

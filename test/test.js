@@ -9,6 +9,7 @@ describe('Generator', function () {
 
   it('should parse meta', function (done) {
     testgen.load(p.join(__dirname, 'fixtures/meta.txt'), function (data) {
+
       assert.deepEqual(data.meta, { desc: 123, skip: true });
 
       assert.strictEqual(data.fixtures.length, 1);
@@ -71,4 +72,128 @@ describe('Generator', function () {
     assert.strictEqual(files, 4);
   });
 
+  it('should scan dir recursively', function () {
+    let files = [];
+
+    testgen.load(p.join(__dirname, 'fixture-1-plus'), function (data) {
+      data.file = data.file.replace(/\\/g, '/').replace(/^.*(fixture-1-plus)/, '$1');
+      files.push(data);
+    });
+    assert.deepEqual(files, [
+      {
+        file: 'fixture-1-plus/dummy1.txt',
+        fixtures: [
+          {
+            first: {
+              range: [
+                4,
+                5
+              ],
+              text: '123\n'
+            },
+            header: '',
+            second: {
+              range: [
+                6,
+                7
+              ],
+              text: '456\n'
+            },
+            type: '.'
+          },
+          {
+            first: {
+              range: [
+                11,
+                12
+              ],
+              text: 'qwe\n'
+            },
+            header: 'reuteldereutel',
+            second: {
+              range: [
+                13,
+                14
+              ],
+              text: 'tzh\n'
+            },
+            type: '.'
+          },
+          {
+            first: {
+              range: [
+                19,
+                20
+              ],
+              text: 'zxc\n'
+            },
+            header: 'bamboebillen',
+            second: {
+              range: [
+                21,
+                22
+              ],
+              text: '}{f\n'
+            },
+            type: '.'
+          }
+        ],
+        meta: undefined
+      },
+      {
+        file: 'fixture-1-plus/subdir/dummy-meta.txt',
+        fixtures: [
+          {
+            first: {
+              range: [
+                6,
+                7
+              ],
+              text: '123\n'
+            },
+            header: '',
+            second: {
+              range: [
+                8,
+                9
+              ],
+              text: '456\n'
+            },
+            type: '.'
+          }
+        ],
+        meta: {
+          desc: 'another faked test',
+          skip: false
+        }
+      }
+    ]);
+  });
 });
+
+  // test the generate() API too:
+describe('Generator should generate a series of (dummy) tests which pass', function () {
+    // function generate(path, options, md, env, meta_overrides)
+    testgen(p.join(__dirname, 'fixture-1-plus'), {
+    }, {
+      render: function (first_text, env) {
+        env.assign_test++;
+        assert.strictEqual(env.this_is_env, true);
+        assert.strictEqual(env.assign_test, 2);
+
+        let rv = '';
+        for (let i in first_text.trim()) {
+          let ch = first_text.codePointAt(i);
+          ch += 3;
+          rv += String.fromCodePoint(ch);
+        }
+
+        return rv + '\n';
+      }
+    }, {
+      this_is_env: true,
+      assign_test: 1
+    }, {
+      // meta overrides
+    });
+    });
