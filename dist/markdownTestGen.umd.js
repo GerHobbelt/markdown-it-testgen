@@ -207,7 +207,7 @@
   }
 
   function generate(path, options, md, env) {
-    if (!md) {
+    if (!md && options.render) {
       md = options;
       options = {};
     }

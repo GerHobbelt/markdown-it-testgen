@@ -279,5 +279,5 @@ describe('Generator correctly handles options.test user-defined test function', 
     test: function (fixture, options, md, env) {
       options.assert.strictEqual(options.userdefRender(fixture.first.text, Object.assign({}, env)), fixture.second.text);
     }
-  }, { /* to force testgenerator to use th options object as-is: md is empty object */ });
+  });
 });
