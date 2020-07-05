@@ -206,7 +206,7 @@
     return null;
   }
 
-  function generate(path, options, md, env, meta_overrides) {
+  function generate(path, options, md, env) {
     if (!md) {
       md = options;
       options = {};
@@ -216,7 +216,7 @@
     options = Object.assign({}, options);
     options.assert = options.assert || require('assert');
     load(path, options, function (data) {
-      data.meta = Object.assign({}, data.meta, meta_overrides);
+      data.meta = Object.assign({}, data.meta);
       let desc = data.meta.desc || p.relative(path, data.file);
       options.assert.strictEqual(typeof desc, 'string', 'every test series is expected to come with a decent title');
       options.assert(desc.length > 0, 'every test series is expected to come with a decent *non-empty* title');

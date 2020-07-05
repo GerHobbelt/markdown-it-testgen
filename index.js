@@ -194,7 +194,7 @@ function load(path, options, iterator) {
   return null;
 }
 
-function generate(path, options, md, env, meta_overrides) {
+function generate(path, options, md, env) {
   if (!md) {
     md = options;
     options = {};
@@ -206,7 +206,7 @@ function generate(path, options, md, env, meta_overrides) {
   options.assert = options.assert || require('assert');
 
   load(path, options, function (data) {
-    data.meta = Object.assign({}, data.meta, meta_overrides);
+    data.meta = Object.assign({}, data.meta);
 
     let desc = data.meta.desc || p.relative(path, data.file);
     options.assert.strictEqual(typeof desc, 'string', 'every test series is expected to come with a decent title');
