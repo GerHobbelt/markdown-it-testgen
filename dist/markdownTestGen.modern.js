@@ -1,4 +1,4 @@
-/*! markdown-it-testgen 0.1.6-13 https://github.com//GerHobbelt/markdown-it-testgen @license MIT */
+/*! markdown-it-testgen 0.1.6-14 https://github.com//GerHobbelt/markdown-it-testgen @license MIT */
 
 let fs = require('fs');
 
@@ -221,8 +221,6 @@ function generate(path, options, md, env) {
     (data.meta.skip ? describe.skip : describe)(desc, function () {
       data.fixtures.forEach(function (fixture) {
         it(fixture.header && options.header ? fixture.header : 'line ' + (fixture.first.range[0] - 1), function () {
-          console.log('options:', options);
-
           if (options.test) {
             options.test(fixture, options, md, Object.assign({}, env));
           } else {
