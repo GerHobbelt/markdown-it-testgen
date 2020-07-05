@@ -32,15 +32,11 @@
   }
 
   function parse(input, options) {
-    let lines = input.split(/\r?\n/g),
-        max = lines.length,
-        min = 0,
-        line = 0,
-        fixture,
-        i,
-        l,
-        currentSep,
-        blockStart;
+    let lines = input.split(/\r?\n/g);
+    let max = lines.length;
+    let min = 0;
+    let line = 0;
+    let fixture, i, l, currentSep, blockStart;
     let result = {
       fixtures: []
     };
@@ -183,10 +179,6 @@
         parsed.meta = null;
       }
 
-      console.log('parsed.meta = ', {
-        meta: parsed.meta
-      });
-
       if (iterator) {
         iterator(parsed);
       }
@@ -225,10 +217,6 @@
     options.assert = options.assert || require('assert');
     load(path, options, function (data) {
       data.meta = Object.assign({}, data.meta, meta_overrides);
-      console.log('data.meta = ', {
-        data: data.meta,
-        meta_overrides
-      });
       let desc = data.meta.desc || p.relative(path, data.file);
       options.assert.strictEqual(typeof desc, 'string', 'every test series is expected to come with a decent title');
       options.assert(desc.length > 0, 'every test series is expected to come with a decent *non-empty* title');

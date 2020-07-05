@@ -174,26 +174,45 @@ describe('Generator', function () {
   // test the generate() API too:
 describe('Generator should generate a series of (dummy) tests which pass', function () {
     // function generate(path, options, md, env, meta_overrides)
-    testgen(p.join(__dirname, 'fixture-1-plus'), {
-    }, {
-      render: function (first_text, env) {
-        env.assign_test++;
-        assert.strictEqual(env.this_is_env, true);
-        assert.strictEqual(env.assign_test, 2);
+  testgen(p.join(__dirname, 'fixture-1-plus'), {
+  }, {
+    render: function (first_text, env) {
+      env.assign_test++;
+      assert.strictEqual(env.this_is_env, true);
+      assert.strictEqual(env.assign_test, 2);
 
-        let rv = '';
-        for (let i in first_text.trim()) {
-          let ch = first_text.codePointAt(i);
-          ch += 3;
-          rv += String.fromCodePoint(ch);
-        }
-
-        return rv + '\n';
+      let rv = '';
+      for (let i in first_text.trim()) {
+        let ch = first_text.codePointAt(i);
+        ch += 3;
+        rv += String.fromCodePoint(ch);
       }
-    }, {
-      this_is_env: true,
-      assign_test: 1
-    }, {
+
+      return rv + '\n';
+    }
+  }, {
+    this_is_env: true,
+    assign_test: 1
+  }, {
       // meta overrides
-    });
-    });
+  });
+});
+
+describe('Generator should generate a series of (dummy) tests which pass using minimal parameters', function () {
+    // function generate(path, [options, ] md)
+  testgen(p.join(__dirname, 'fixture-1-plus'), {
+    render: function (first_text, env) {
+      // make sure `env` parameter is not NULL:
+      assert.ok(env != null);
+
+      let rv = '';
+      for (let i in first_text.trim()) {
+        let ch = first_text.codePointAt(i);
+        ch += 3;
+        rv += String.fromCodePoint(ch);
+      }
+
+      return rv + '\n';
+    }
+  });
+});

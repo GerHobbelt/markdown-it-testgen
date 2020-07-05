@@ -5,23 +5,32 @@ let p       = require('path');
 let yaml    = require('js-yaml');
 
 
-function _class(obj) { return Object.prototype.toString.call(obj); }
+function _class(obj) {
+  return Object.prototype.toString.call(obj);
+}
 
-function isString(obj)   { return _class(obj) === '[object String]'; }
-function isFunction(obj) { return _class(obj) === '[object Function]'; }
-function isArray(obj)    { return _class(obj) === '[object Array]'; }
+function isString(obj)   {
+  return _class(obj) === '[object String]';
+}
+function isFunction(obj) {
+  return _class(obj) === '[object Function]';
+}
+function isArray(obj)    {
+  return _class(obj) === '[object Array]';
+}
 
 
 function fixLF(str) {
   return str.length ? str + '\n' : str;
 }
 
+
 function parse(input, options) {
-  let lines = input.split(/\r?\n/g),
-      max = lines.length,
-      min = 0,
-      line = 0,
-      fixture, i, l, currentSep, blockStart;
+  let lines = input.split(/\r?\n/g);
+  let max = lines.length;
+  let min = 0;
+  let line = 0;
+  let fixture, i, l, currentSep, blockStart;
 
   let result = {
     fixtures: []
@@ -32,14 +41,15 @@ function parse(input, options) {
   // Try to parse meta
   if (/^-{3,}$/.test(lines[0] || '')) {
     line++;
-    while (line < max && !/^-{3,}$/.test(lines[line])) { line++; }
+    while (line < max && !/^-{3,}$/.test(lines[line])) {
+      line++;
+    }
 
     // If meta end found - extract range
     if (line < max) {
       result.meta = lines.slice(1, line).join('\n');
       line++;
       min = line;
-
     } else {
       // if no meta closing - reset to start and try to parse data without meta
       line = 1;
@@ -72,8 +82,12 @@ function parse(input, options) {
     blockStart = line;
 
     // seek end of first block
-    while (line < max && lines[line] !== currentSep) { line++; }
-    if (line >= max) { break; }
+    while (line < max && lines[line] !== currentSep) {
+      line++;
+    }
+    if (line >= max) {
+      break;
+    }
 
     fixture.first.text = fixLF(lines.slice(blockStart, line).join('\n'));
     fixture.first.range.push(blockStart, line);
@@ -81,8 +95,12 @@ function parse(input, options) {
     blockStart = line;
 
     // seek end of second block
-    while (line < max && lines[line] !== currentSep) { line++; }
-    if (line >= max) { break; }
+    while (line < max && lines[line] !== currentSep) {
+      line++;
+    }
+    if (line >= max) {
+      break;
+    }
 
     fixture.second.text = fixLF(lines.slice(blockStart, line).join('\n'));
     fixture.second.range.push(blockStart, line);
@@ -92,7 +110,9 @@ function parse(input, options) {
     i = fixture.first.range[0] - 2;
     while (i >= Math.max(min, fixture.first.range[0] - 3)) {
       l = lines[i];
-      if (sep.indexOf(l) >= 0) { break; }
+      if (sep.indexOf(l) >= 0) {
+        break;
+      }
       if (l.trim().length) {
         fixture.header = l.trim();
         break;
@@ -137,7 +157,9 @@ function load(path, options, iterator) {
 
     parsed = parse(input, options);
 
-    if (!parsed) { return null; }
+    if (!parsed) {
+      return null;
+    }
 
     parsed.file = path;
     try {
