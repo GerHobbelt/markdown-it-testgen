@@ -1,4 +1,4 @@
-/*! markdown-it-testgen 0.1.6-14 https://github.com//GerHobbelt/markdown-it-testgen @license MIT */
+/*! markdown-it-testgen 0.1.6-15 https://github.com//GerHobbelt/markdown-it-testgen @license MIT */
 
 (function (factory) {
   typeof define === 'function' && define.amd ? define(factory) :
