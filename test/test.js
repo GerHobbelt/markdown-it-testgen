@@ -236,4 +236,23 @@ describe('Generator should generate a series of (dummy) tests with a decent, non
       return rv + '\n';
     }
   });
+
+    // function generate(path, options, md)
+  testgen(p.join(__dirname, 'fixture-1-plus/dummy1.txt'), {
+    desc: 'test title: overridden'
+  }, {
+    render: function (first_text, env) {
+      // make sure `env` parameter is not NULL:
+      assert.ok(env != null);
+
+      let rv = '';
+      for (let i in first_text.trim()) {
+        let ch = first_text.codePointAt(i);
+        ch += 3;
+        rv += String.fromCodePoint(ch);
+      }
+
+      return rv + '\n';
+    }
+  });
 });

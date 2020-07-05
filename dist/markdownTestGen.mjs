@@ -212,7 +212,7 @@ function generate(path, options, md, env) {
   options.assert = options.assert || require('assert');
   load(path, options, function (data) {
     data.meta = Object.assign({}, data.meta);
-    let desc = data.meta.desc || p.relative(path, data.file);
+    let desc = data.meta.desc || p.relative(path, data.file) || options.desc || p.basename(data.file);
     options.assert.strictEqual(typeof desc, 'string', 'every test series is expected to come with a decent title');
     options.assert(desc.length > 0, 'every test series is expected to come with a decent *non-empty* title');
     (data.meta.skip ? describe.skip : describe)(desc, function () {
