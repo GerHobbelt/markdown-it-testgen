@@ -210,7 +210,7 @@ function generate(path, options, md, env) {
 
     // options.desc wins over metadata, which itself wins over the path-based description generator calls in here:
     let desc = '' + (options.desc || data.meta.desc || p.relative(path, data.file) || p.basename(data.file));
-    // ^ the result is cast to a string as meta.desc MAY be a number of other implicit type originating from 
+    // ^ the result is cast to a string as meta.desc MAY be a number of other implicit type originating from
     //   the YAML parser, e.g. `desc: 123` in your YAML would produce a *number* rather than a *string*.
     options.assert.strictEqual(typeof desc, 'string', 'every test series is expected to come with a decent title');
     options.assert(desc.length > 0, 'every test series is expected to come with a decent *non-empty* title');
