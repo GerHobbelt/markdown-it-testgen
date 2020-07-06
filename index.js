@@ -217,13 +217,14 @@ function generate(path, options, md, env) {
 
     (data.meta.skip ? describe.skip : describe)(desc, function () {
       data.fixtures.forEach(function (fixture) {
-        it(fixture.header && options.header ? fixture.header : 'line ' + (fixture.first.range[0] - 1), function () {
-          if (options.test) {
-            options.test(fixture, options, md, Object.assign({}, env));
-          } else {
+        let testTitle = fixture.header && options.header ? fixture.header : 'line ' + (fixture.first.range[0] - 1);
+        if (options.test) {
+          options.test(it, testTitle, fixture, options, md, Object.assign({}, env));
+        } else {
+          it(testTitle, function () {
             options.assert.strictEqual(md.render(fixture.first.text, Object.assign({}, env)), fixture.second.text);
-          }
-        });
+          });
+        }
       });
     });
   });

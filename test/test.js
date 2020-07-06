@@ -276,8 +276,10 @@ describe('Generator correctly handles options.test user-defined test function', 
       return rv + '\n';
     },
 
-    test: function (fixture, options, md, env) {
-      options.assert.strictEqual(options.userdefRender(fixture.first.text, Object.assign({}, env)), fixture.second.text);
+    test: function (_it_, title, fixture, options, md, env) {
+      _it_(title, () => {
+        options.assert.strictEqual(options.userdefRender(fixture.first.text, Object.assign({}, env)), fixture.second.text);
+      });
     }
   });
 });
