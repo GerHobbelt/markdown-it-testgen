@@ -200,7 +200,7 @@
         }
       });
       return result;
-    } // Silently other entries (symlinks and so on)
+    } // Silently ignore other entries (symlinks and so on)
 
 
     return null;
