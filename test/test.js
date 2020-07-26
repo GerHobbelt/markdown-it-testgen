@@ -66,20 +66,24 @@ describe('Generator', function () {
   it('should scan dir', function () {
     let files = 0;
 
-    testgen.load(p.join(__dirname, 'fixtures'), function () {
+    let result = testgen.load(p.join(__dirname, 'fixtures'), function () {
       files++;
     });
     assert.strictEqual(files, 4);
+    assert.strictEqual(result.length, 4);
+    for (let i = 0; i < result.length; i++) {
+      let parseRecord = result[i];
+      assert(parseRecord.fixtures.length >= 1, `file #${i} (${parseRecord.file}) has no fixtures?`);
+    }
   });
 
   it('should scan dir recursively', function () {
     let files = [];
-
-    testgen.load(p.join(__dirname, 'fixture-1-plus'), function (data) {
+    let result = testgen.load(p.join(__dirname, 'fixture-1-plus'), function (data) {
       data.file = data.file.replace(/\\/g, '/').replace(/^.*(fixture-1-plus)/, '$1');
       files.push(data);
     });
-    assert.deepEqual(files, [
+    const sollwert = [
       {
         file: 'fixture-1-plus/dummy1.txt',
         fixtures: [
@@ -167,13 +171,15 @@ describe('Generator', function () {
           skip: false
         }
       }
-    ]);
+    ];
+    assert.deepEqual(files, sollwert);
+    assert.deepEqual(result, sollwert);
   });
 });
 
   // test the generate() API too:
 describe('Generator should generate a series of (dummy) tests which pass', function () {
-    // function generate(path, options, md, env, meta_overrides)
+  // function generate(path, options, md, env)
   testgen(p.join(__dirname, 'fixture-1-plus'), {
   }, {
     render: function (first_text, env) {
@@ -193,13 +199,11 @@ describe('Generator should generate a series of (dummy) tests which pass', funct
   }, {
     this_is_env: true,
     assign_test: 1
-  }, {
-      // meta overrides
   });
 });
 
 describe('Generator should generate a series of (dummy) tests which pass using minimal parameters', function () {
-    // function generate(path, [options, ] md)
+  // function generate(path, [options, ] md[, env])
   testgen(p.join(__dirname, 'fixture-1-plus'), {
     render: function (first_text, env) {
       // make sure `env` parameter is not NULL:
@@ -220,7 +224,7 @@ describe('Generator should generate a series of (dummy) tests which pass using m
 // Without the options.desc override, this would trigger the internal description assert
 // due to `path.relative(...)` producing an empty string.
 describe('Generator should generate a series of (dummy) tests with a decent, non-empty title', function () {
-    // function generate(path, [options, ] md)
+  // function generate(path, [options, ] md)
   testgen(p.join(__dirname, 'fixture-1-plus/dummy1.txt'), {
     render: function (first_text, env) {
       // make sure `env` parameter is not NULL:
@@ -237,7 +241,7 @@ describe('Generator should generate a series of (dummy) tests with a decent, non
     }
   });
 
-    // function generate(path, options, md)
+  // function generate(path, options, md)
   testgen(p.join(__dirname, 'fixture-1-plus/dummy1.txt'), {
     desc: 'test title: overridden'
   }, {
@@ -258,7 +262,7 @@ describe('Generator should generate a series of (dummy) tests with a decent, non
 });
 
 describe('Generator correctly handles options.test user-defined test function', function () {
-    // function generate(path, options, md)
+  // function generate(path, options, md)
   testgen(p.join(__dirname, 'fixture-1-plus/dummy1.txt'), {
     desc: 'test title: overridden',
 
