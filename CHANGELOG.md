@@ -1,3 +1,16 @@
+# 0.1.6-17 (2020/7/26)
+
+## Features
+
+- updated the README documentation to describe the latest features and all userland-code visible object structures.
+  ([1f9ac79d](https://github.com/GerHobbelt/markdown-it-testgen/commit/1f9ac79d))
+
+## Testing
+
+- augmented some tests to also verify the correctness of API return values/structures.
+  ([d9a5a910](https://github.com/GerHobbelt/markdown-it-testgen/commit/d9a5a910))
+
+
 # 0.1.6-16 (2020/7/26)
 
 - Maintenance release.
