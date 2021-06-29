@@ -174,8 +174,15 @@
       parsed.file = path;
 
       try {
-        parsed.meta = yaml.safeLoad(parsed.meta || '');
-      } catch (__) {
+        let src = parsed.meta || '';
+
+        if (src.trim() === '') {
+          parsed.meta = null;
+        } else {
+          parsed.meta = yaml.safeLoad(src);
+        }
+      } catch (ex) {
+        console.error('markdon-it-testgen: META parse error:', ex);
         parsed.meta = null;
       }
 
