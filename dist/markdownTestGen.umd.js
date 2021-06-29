@@ -179,7 +179,7 @@
         if (src.trim() === '') {
           parsed.meta = null;
         } else {
-          parsed.meta = yaml.safeLoad(src);
+          parsed.meta = yaml.load(src);
         }
       } catch (ex) {
         console.error('markdon-it-testgen: META parse error:', ex);
