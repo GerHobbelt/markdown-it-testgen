@@ -1,10 +1,10 @@
 /*! markdown-it-testgen 0.1.6-19 https://github.com//GerHobbelt/markdown-it-testgen @license MIT */
 
-let fs = require('fs');
+const fs = require('fs');
 
-let p = require('path');
+const p = require('path');
 
-let yaml = require('js-yaml');
+const yaml = require('js-yaml');
 
 function _class(obj) {
   return Object.prototype.toString.call(obj);
@@ -27,15 +27,15 @@ function fixLF(str) {
 }
 
 function parse(input, options) {
-  let lines = input.split(/\r?\n/g);
-  let max = lines.length;
+  const lines = input.split(/\r?\n/g);
+  const max = lines.length;
   let min = 0;
   let line = 0;
   let fixture, i, l, currentSep, blockStart;
-  let result = {
+  const result = {
     fixtures: []
   };
-  let sep = options.sep || ['.']; // Try to parse meta
+  const sep = options.sep || ['.']; // Try to parse meta
 
   if (/^-{3,}$/.test(lines[0] || '')) {
     line++;
@@ -169,7 +169,7 @@ function load(path, options, iterator) {
     parsed.file = path;
 
     try {
-      let src = parsed.meta || '';
+      const src = parsed.meta || '';
 
       if (src.trim() === '') {
         parsed.meta = null;
@@ -220,14 +220,14 @@ function generate(path, options, md, env) {
   load(path, options, function (data) {
     data.meta = Object.assign({}, data.meta); // options.desc wins over metadata, which itself wins over the path-based description generator calls in here:
 
-    let desc = '' + (options.desc || data.meta.desc || p.relative(path, data.file) || p.basename(data.file)); // ^ the result is cast to a string as meta.desc MAY be a number of other implicit type originating from
+    const desc = '' + (options.desc || data.meta.desc || p.relative(path, data.file) || p.basename(data.file)); // ^ the result is cast to a string as meta.desc MAY be a number of other implicit type originating from
     //   the YAML parser, e.g. `desc: 123` in your YAML would produce a *number* rather than a *string*.
 
     options.assert.strictEqual(typeof desc, 'string', 'every test series is expected to come with a decent title');
     options.assert(desc.length > 0, 'every test series is expected to come with a decent *non-empty* title');
     (data.meta.skip ? describe.skip : describe)(desc, function () {
       data.fixtures.forEach(function (fixture) {
-        let testTitle = fixture.header && options.header ? fixture.header : 'line ' + (fixture.first.range[0] - 1);
+        const testTitle = fixture.header && options.header ? fixture.header : 'line ' + (fixture.first.range[0] - 1);
 
         if (options.test) {
           options.test(it, testTitle, fixture, options, md, Object.assign({}, env));
@@ -243,4 +243,4 @@ function generate(path, options, md, env) {
 
 module.exports = generate;
 module.exports.load = load;
-//# sourceMappingURL=markdownTestGen.mjs.map
+//# sourceMappingURL=markdownItTestgen.modern.js.map

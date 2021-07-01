@@ -1,9 +1,9 @@
 
 /* eslint-env mocha, es6 */
 
-let p       = require('path');
-let assert  = require('assert');
-let testgen = require('../');
+const p       = require('path');
+const assert  = require('assert');
+const testgen = require('../');
 
 describe('Generator', function () {
 
@@ -66,20 +66,20 @@ describe('Generator', function () {
   it('should scan dir', function () {
     let files = 0;
 
-    let result = testgen.load(p.join(__dirname, 'fixtures'), function () {
+    const result = testgen.load(p.join(__dirname, 'fixtures'), function () {
       files++;
     });
     assert.strictEqual(files, 4);
     assert.strictEqual(result.length, 4);
     for (let i = 0; i < result.length; i++) {
-      let parseRecord = result[i];
+      const parseRecord = result[i];
       assert(parseRecord.fixtures.length >= 1, `file #${i} (${parseRecord.file}) has no fixtures?`);
     }
   });
 
   it('should scan dir recursively', function () {
-    let files = [];
-    let result = testgen.load(p.join(__dirname, 'fixture-1-plus'), function (data) {
+    const files = [];
+    const result = testgen.load(p.join(__dirname, 'fixture-1-plus'), function (data) {
       data.file = data.file.replace(/\\/g, '/').replace(/^.*(fixture-1-plus)/, '$1');
       files.push(data);
     });
@@ -188,7 +188,7 @@ describe('Generator should generate a series of (dummy) tests which pass', funct
       assert.strictEqual(env.assign_test, 2);
 
       let rv = '';
-      for (let i in first_text.trim()) {
+      for (const i in first_text.trim()) {
         let ch = first_text.codePointAt(i);
         ch += 3;
         rv += String.fromCodePoint(ch);
@@ -210,7 +210,7 @@ describe('Generator should generate a series of (dummy) tests which pass using m
       assert.ok(env != null);
 
       let rv = '';
-      for (let i in first_text.trim()) {
+      for (const i in first_text.trim()) {
         let ch = first_text.codePointAt(i);
         ch += 3;
         rv += String.fromCodePoint(ch);
@@ -231,7 +231,7 @@ describe('Generator should generate a series of (dummy) tests with a decent, non
       assert.ok(env != null);
 
       let rv = '';
-      for (let i in first_text.trim()) {
+      for (const i in first_text.trim()) {
         let ch = first_text.codePointAt(i);
         ch += 3;
         rv += String.fromCodePoint(ch);
@@ -250,7 +250,7 @@ describe('Generator should generate a series of (dummy) tests with a decent, non
       assert.ok(env != null);
 
       let rv = '';
-      for (let i in first_text.trim()) {
+      for (const i in first_text.trim()) {
         let ch = first_text.codePointAt(i);
         ch += 3;
         rv += String.fromCodePoint(ch);
@@ -271,7 +271,7 @@ describe('Generator correctly handles options.test user-defined test function', 
       assert.ok(env != null);
 
       let rv = '';
-      for (let i in first_text.trim()) {
+      for (const i in first_text.trim()) {
         let ch = first_text.codePointAt(i);
         ch += 3;
         rv += String.fromCodePoint(ch);

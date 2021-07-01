@@ -10,10 +10,10 @@
   "repository": "GerHobbelt/markdown-it-testgen",
   "license": "MIT",
   "source": "index.js",
-  "main": "dist/markdownTestGen.js",
-  "module": "dist/markdownItTestGen.mjs",
+  "main": "dist/markdownItTestgen.js",
+  "module": "dist/markdownItTestgen.mjs",
   "engines": {
-    "node": ">=10"
+    "node": ">=12.21"
   },
   "scripts": {
     "build": "make",
@@ -31,10 +31,9 @@
     "js-yaml": "4.1.0"
   },
   "devDependencies": {
-    "@gerhobbelt/markdown-it": "12.0.6-55",
-    "@gerhobbelt/markdown-it-testgen": "0.1.6-17",
+    "@gerhobbelt/markdown-it": "12.0.6-56",
+    "@gerhobbelt/markdown-it-testgen": "0.1.6-18",
     "@gerhobbelt/prepend-header": "1.1.0-7",
-    "camelcase": "6.2.0",
     "cross-env": "7.0.3",
     "eslint": "7.29.0",
     "microbundle": "0.13.3",
@@ -44,6 +43,7 @@
   "reporter": [
     "lcov",
     "text",
+    "html",
     "text-summary"
   ]
 }
