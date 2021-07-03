@@ -1,6 +1,7 @@
 # markdown-it-testgen
 
-[![Build Status](https://img.shields.io/travis/markdown-it/markdown-it-testgen/master.svg?style=flat)](https://travis-ci.org/markdown-it/markdown-it-testgen)
+[![Node.js CI](https://github.com/GerHobbelt/markdown-it-testgen/actions/workflows/node.js.yml/badge.svg)](https://github.com/GerHobbelt/markdown-it-testgen/actions/workflows/node.js.yml)
+![CircleCI](https://img.shields.io/circleci/build/github/GerHobbelt/markdown-it-testgen)
 [![NPM version](https://img.shields.io/npm/v/markdown-it-testgen.svg?style=flat)](https://www.npmjs.org/package/markdown-it-testgen)
 
 
