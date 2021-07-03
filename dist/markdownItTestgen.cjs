@@ -1,4 +1,4 @@
-/*! markdown-it-testgen 0.1.6-21 https://github.com//GerHobbelt/markdown-it-testgen @license MIT */
+/*! markdown-it-testgen 0.1.6-22 https://github.com//GerHobbelt/markdown-it-testgen @license MIT */
 
 'use strict';
 
