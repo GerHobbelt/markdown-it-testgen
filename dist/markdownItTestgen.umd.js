@@ -1,4 +1,4 @@
-/*! markdown-it-testgen 0.1.6-22 https://github.com//GerHobbelt/markdown-it-testgen @license MIT */
+/*! markdown-it-testgen 0.1.6-23 https://github.com//GerHobbelt/markdown-it-testgen @license MIT */
 
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('assert'), require('path'), require('fs'), require('js-yaml')) :
