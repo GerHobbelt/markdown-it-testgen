@@ -35,8 +35,8 @@
     "js-yaml": "4.1.0"
   },
   "devDependencies": {
-    "@gerhobbelt/markdown-it": "12.1.0-58",
-    "@gerhobbelt/markdown-it-testgen": "0.1.6-21",
+    "@gerhobbelt/markdown-it": "12.1.0-63",
+    "@gerhobbelt/markdown-it-testgen": "0.1.6-22",
     "@gerhobbelt/prepend-header": "1.1.0-8",
     "@typescript-eslint/eslint-plugin": "4.28.1",
     "@typescript-eslint/parser": "4.28.1",
