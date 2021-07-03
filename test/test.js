@@ -1,9 +1,20 @@
 
 /* eslint-env mocha, es6 */
 
-const p       = require('path');
-const assert  = require('assert');
-const testgen = require('../');
+import assert from 'assert';
+import p from 'path';
+import fs from 'fs';
+
+import testgen from '../index.js';
+
+
+import { fileURLToPath } from 'url';
+
+// see https://nodejs.org/docs/latest-v13.x/api/esm.html#esm_no_require_exports_module_exports_filename_dirname
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = p.dirname(__filename);
+
+
 
 describe('Generator', function () {
 

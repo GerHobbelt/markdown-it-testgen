@@ -1,10 +1,9 @@
 /*! markdown-it-testgen 0.1.6-21 https://github.com//GerHobbelt/markdown-it-testgen @license MIT */
 
-const fs = require('fs');
-
-const p = require('path');
-
-const yaml = require('js-yaml');
+import assert from 'assert';
+import p from 'path';
+import fs from 'fs';
+import yaml from 'js-yaml';
 
 function _class(obj) {
   return Object.prototype.toString.call(obj);
@@ -208,7 +207,7 @@ function load(path, options, iterator) {
   return null;
 }
 
-function generate(path, options, md, env) {
+const generate = function generate(path, options, md, env) {
   if (!md && options.render) {
     md = options;
     options = {};
@@ -216,7 +215,7 @@ function generate(path, options, md, env) {
 
   env = env || {};
   options = Object.assign({}, options);
-  options.assert = options.assert || require('assert');
+  options.assert = options.assert || assert;
   load(path, options, function (data) {
     data.meta = Object.assign({}, data.meta); // options.desc wins over metadata, which itself wins over the path-based description generator calls in here:
 
@@ -239,8 +238,9 @@ function generate(path, options, md, env) {
       });
     });
   });
-}
+};
 
-module.exports = generate;
-module.exports.load = load;
+generate.load = load;
+
+export default generate;
 //# sourceMappingURL=markdownItTestgen.modern.js.map

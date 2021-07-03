@@ -4,11 +4,22 @@ env:
   browser:  false
   es6:      true
 
-extends: eslint:recommended
+parser:     "@typescript-eslint/parser"
+
+plugins: 
+  - "@typescript-eslint"
+
+extends: 
+  - eslint:recommended
+  - plugin:@typescript-eslint/recommended
 
 parserOptions: 
   ecmaVersion: 2020
   sourceType: module
+  
+ignorePatterns:
+  - coverage/
+  - dist/
   
 rules:
   accessor-pairs:         2

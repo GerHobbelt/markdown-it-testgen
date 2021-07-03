@@ -9,9 +9,13 @@
   ],
   "repository": "GerHobbelt/markdown-it-testgen",
   "license": "MIT",
+  "type": "module",
   "source": "index.js",
-  "main": "dist/markdownItTestgen.js",
-  "module": "dist/markdownItTestgen.mjs",
+  "main": "./dist/markdownItTestgen.cjs",
+  "module": "./dist/markdownItTestgen.mjs",
+  "exports": "./dist/markdownItTestgen.modern.js",
+  "unpkg": "./dist/markdownItTestgen.umd.js",
+  "umd:main": "./dist/markdownItTestgen.umd.js",
   "engines": {
     "node": ">=12.21"
   },
@@ -31,13 +35,15 @@
     "js-yaml": "4.1.0"
   },
   "devDependencies": {
-    "@gerhobbelt/markdown-it": "12.0.6-56",
-    "@gerhobbelt/markdown-it-testgen": "0.1.6-19",
+    "@gerhobbelt/markdown-it": "12.0.6-57",
+    "@gerhobbelt/markdown-it-testgen": "0.1.6-20",
     "@gerhobbelt/prepend-header": "1.1.0-8",
+    "@typescript-eslint/eslint-plugin": "4.28.1",
+    "@typescript-eslint/parser": "4.28.1",
     "cross-env": "7.0.3",
-    "eslint": "7.29.0",
+    "eslint": "7.30.0",
     "microbundle": "0.13.3",
-    "mocha": "9.0.1",
+    "mocha": "9.0.2",
     "nyc": "15.1.0"
   },
   "reporter": [

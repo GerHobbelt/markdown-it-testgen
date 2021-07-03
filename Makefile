@@ -18,17 +18,15 @@ GITHUB_PROJ := https://github.com//GerHobbelt/${NPM_PACKAGE}
 build: report-config lintfix bundle test coverage todo
 
 lint:
-	eslint .
+	eslint . --ext .js,.ts
 
 lintfix:
-	eslint --fix .
+	eslint --fix . --ext .js,.ts
 
 bundle:
 	-rm -rf ./dist
 	mkdir dist
-	microbundle --no-compress --target node --strict --name ${GLOBAL_NAME} -f modern
-	mv dist/${BUNDLE_NAME}.modern.js dist/${BUNDLE_NAME}.js
-	mv dist/${BUNDLE_NAME}.modern.js.map dist/${BUNDLE_NAME}.js.map
+	microbundle --no-compress --target node --strict --name ${GLOBAL_NAME}
 	npx prepend-header 'dist/*js' support/header.js
 
 test:
@@ -65,7 +63,7 @@ todo:
 	@echo ""
 	grep 'TODO' -n -r ./ --exclude-dir=node_modules --exclude-dir=unicode-homographs --exclude-dir=.nyc_output --exclude-dir=dist --exclude-dir=coverage --exclude=Makefile 2>/dev/null || test true
 
-clean:
+clean: report-config
 	-rm -rf ./coverage/
 	-rm -rf ./dist/
 	-rm -rf ./.nyc_output/
@@ -82,7 +80,10 @@ prep: superclean
 
 prep-ci: clean
 	-rm -rf ./node_modules/
-	-npm ci
+	# HACK to allow CI to pass the npm install phase (crash due to minimatch SHA failure **WTF?!**)
+	-rm package-lock.json
+	#-npm ci
+	-npm install
 	-npm prune
 	-npm audit fix
 	-mocha --version
@@ -93,4 +94,4 @@ report-config:
 
 
 .PHONY: clean superclean prep prep-ci report-config publish lint lintfix test todo coverage report-coverage doc build gh-doc bundle
-.SILENT: help todo report-config
+.SILENT: help lint test todo report-config
