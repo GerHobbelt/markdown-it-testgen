@@ -32,7 +32,7 @@
     "pub": "npm publish --access public"
   },
   "dependencies": {
-    "js-yaml": "4.1.0"
+    "js-yaml": "4.1.1"
   },
   "devDependencies": {
     "@gerhobbelt/markdown-it": "12.1.0-63",
